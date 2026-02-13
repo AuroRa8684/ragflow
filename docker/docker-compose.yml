@@ -49,10 +49,10 @@ services:
     # If you use Docker Desktop, the --add-host flag is optional. This flag ensures that the host's internal IP is exposed to the Prometheus container.
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    # environment:
-    #   - http_proxy=http://host.docker.internal:8888
-    #   - https_proxy=http://host.docker.internal:8888
-    #   - no_proxy=localhost,127.0.0.1,mysql,minio,es01,redis,valkey,opensearch01,infinity,oceanbase,seekdb,172.16.0.0/12
+    environment:
+      - http_proxy=http://host.docker.internal:8888
+      - https_proxy=http://host.docker.internal:8888
+      - no_proxy=localhost,127.0.0.1,mysql,minio,es01,redis,valkey,opensearch01,infinity,oceanbase,seekdb,172.16.0.0/12
 
   ragflow-gpu:
     depends_on:
