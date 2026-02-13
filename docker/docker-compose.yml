@@ -49,6 +49,11 @@ services:
     # If you use Docker Desktop, the --add-host flag is optional. This flag ensures that the host's internal IP is exposed to the Prometheus container.
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    #容器内代理问题：RAGFlow 容器调用硅基流动 API 时，网络请求从容器内发出，不会自动使用宿主机的 proxy。解决方案是在 docker-compose.yml 的 ragflow-cpu 服务中添加环境变量：
+    environment:
+      - http_proxy=http://host.docker.internal:8888
+      - https_proxy=http://host.docker.internal:8888
+      - no_proxy=localhost,127.0.0.1,mysql,minio,es01,redis
 
   ragflow-gpu:
     depends_on:
